@@ -1,0 +1,28 @@
+@use 'mixins' as *;
+
+// Shared by legal-notice and privacy-policy — Angular scopes styles per component,
+// so both components @use this partial instead of duplicating the rules.
+.legal-page {
+  @include content-container;
+
+  max-width: 45rem; // 720px
+  padding-block: var(--space-16);
+}
+
+.legal-page__title {
+  margin-block-end: var(--space-8);
+  font-size: var(--fs-500);
+}
+
+.legal-page__section {
+  margin-block-end: var(--space-8);
+}
+
+.legal-page__heading {
+  margin-block-end: var(--space-2);
+  font-size: var(--fs-300);
+}
+
+.legal-page__text {
+  color: var(--color-text-muted);
+}

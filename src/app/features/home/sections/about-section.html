@@ -1,0 +1,30 @@
+<section class="about" id="about" aria-labelledby="about-title">
+  <span class="about__circle about__circle--large" aria-hidden="true"></span>
+  <span class="about__circle about__circle--small" aria-hidden="true"></span>
+
+  <div class="about__inner">
+    <div class="about__intro">
+      <h2 class="about__title" id="about-title">{{ about().title }}</h2>
+
+      <div class="about__availability">
+        <p class="about__availability-label">{{ about().availabilityLabel }}</p>
+        <ul class="about__badges">
+          @for (badge of badges(); track badge.label) {
+            <li class="about__badge">
+              <img class="about__badge-icon" [src]="badge.icon" alt="" width="32" height="32" />
+              {{ badge.label }}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="about__body">
+      @for (paragraph of about().paragraphs; track $index) {
+        <p class="about__paragraph">{{ paragraph }}</p>
+      }
+
+      <a class="button button--primary about__cta" href="#contact">{{ about().ctaLabel }}</a>
+    </div>
+  </div>
+</section>

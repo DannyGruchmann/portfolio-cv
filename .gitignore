@@ -21,6 +21,7 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -39,6 +40,19 @@ testem.log
 /typings
 __screenshots__/
 
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Figma-Referenzbilder — die Specs (.md/.xml) bleiben versioniert, die Bilder nicht
+docs/figma-specs/img/
+
 # System files
 .DS_Store
 Thumbs.db
+
+# docs 
+docs
+.tmp-shots
+
+# IDEs
+.claude

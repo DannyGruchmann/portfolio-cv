@@ -1,0 +1,19 @@
+<ul
+  class="social-links"
+  [class.social-links--vertical]="orientation() === 'vertical'"
+  [attr.aria-label]="label()"
+>
+  @for (link of links; track link.id) {
+    <li>
+      <a
+        class="social-links__item"
+        [href]="link.url"
+        [attr.target]="link.isExternal ? '_blank' : null"
+        [attr.rel]="link.isExternal ? 'noopener noreferrer' : null"
+        [attr.aria-label]="link.label"
+      >
+        <span class="social-links__glyph" [style.--social-icon]="link.maskImage"></span>
+      </a>
+    </li>
+  }
+</ul>

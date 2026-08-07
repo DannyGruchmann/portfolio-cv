@@ -1,0 +1,91 @@
+@use 'mixins' as *;
+
+// Globale Button-Klassen. Global statt Komponente, weil Buttons sowohl als
+// <button> als auch als <a> auftreten und Angular-Styles sonst pro Komponente
+// dupliziert werden muessten.
+.button {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  min-height: 3.625rem; // 58px laut Figma
+  padding-inline: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--fs-300);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  // Vorlage: der Button waechst beim Hover leicht und bekommt den Schlagschatten.
+  // scale statt Groessenaenderung, damit der Textfluss daneben ruhig bleibt.
+  &:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+  }
+
+  // Wer die Bewegung abgestellt hat, bekommt nur den Farb- und Schattenwechsel.
+  @media (prefers-reduced-motion: reduce) {
+    &:hover:not(:disabled),
+    &:active:not(:disabled) {
+      transform: none;
+    }
+  }
+}
+
+.button--primary {
+  color: var(--color-text-on-primary);
+  background-color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-button);
+  }
+}
+
+.button--secondary {
+  color: var(--color-primary);
+  background-color: transparent;
+  border-color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-button);
+  }
+}
+
+// Auf blauem Grund (Skill-Set-Section, Footer) kehrt sich der Kontrast um.
+.button--on-primary {
+  color: var(--color-primary);
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+
+  &:hover:not(:disabled) {
+    color: var(--color-white);
+    background-color: transparent;
+    // Auf blauem Grund traegt der blaue Buttonschatten nicht, deshalb neutral.
+    box-shadow: 0 4px 12px rgb(15 32 74 / 0.25);
+  }
+}
+
+.button--block {
+  width: 100%;
+}

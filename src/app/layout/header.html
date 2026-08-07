@@ -1,0 +1,38 @@
+<header class="site-header" [class.site-header--scrolled]="isScrolled()" [class.site-header--menu-open]="isMenuOpen()"
+  [class.site-header--over-hero]="isOverHero()">
+  <div class="site-header__inner">
+    <a class="site-header__logo" routerLink="/" (click)="closeMenu()">
+      <app-logo [width]="64" [height]="69" />
+    </a>
+
+    <button class="site-header__toggle" type="button" aria-controls="primary-navigation"
+      [attr.aria-expanded]="isMenuOpen()" [attr.aria-label]="isMenuOpen() ? nav().menuClose : nav().menuOpen"
+      (click)="toggleMenu()">
+      <span class="site-header__burger" [class.site-header__burger--open]="isMenuOpen()"></span>
+    </button>
+
+    <nav class="site-header__nav" id="primary-navigation" [class.site-header__nav--open]="isMenuOpen()">
+      <ul class="site-header__list">
+        @for (item of navItems(); track item.fragment) {
+        <li>
+          <a class="site-header__link" [routerLink]="['/']" [fragment]="item.fragment" (click)="closeMenu()">
+            {{ item.label }}
+          </a>
+        </li>
+        }
+      </ul>
+
+      <div class="site-header__languages">
+        @for (code of languages; track code; let last = $last) {
+        <button class="site-header__language" type="button" [class.site-header__language--active]="language() === code"
+          [attr.aria-current]="language() === code ? 'true' : null" (click)="selectLanguage(code)">
+          {{ code.toUpperCase() }}
+        </button>
+        @if (!last) {
+        <span class="site-header__language-divider" aria-hidden="true">/</span>
+        }
+        }
+      </div>
+    </nav>
+  </div>
+</header>

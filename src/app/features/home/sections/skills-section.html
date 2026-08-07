@@ -1,0 +1,21 @@
+<section class="skills" id="skills" aria-labelledby="skills-title">
+  <div class="skills__inner">
+    <h2 class="skills__title" id="skills-title">{{ content().title }}</h2>
+    <p class="skills__intro">{{ content().intro }}</p>
+
+    <ul class="skills__grid">
+      @for (skill of skills; track skill.name) {
+        <li class="skills__item">
+          <span class="skills__icon">
+            @if (skill.src; as src) {
+              <img class="skills__image" [src]="src" alt="" width="72" height="72" />
+            } @else if (skill.path; as path) {
+              <app-icon [path]="path" [size]="72" />
+            }
+          </span>
+          <span class="skills__label">{{ skill.name }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

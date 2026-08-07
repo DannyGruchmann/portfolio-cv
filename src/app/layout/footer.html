@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <a class="site-footer__logo" routerLink="/">
+      <app-logo [width]="64" [height]="69" />
+    </a>
+
+    <p class="site-footer__copyright">&copy; Danny Gruchmann {{ year }}</p>
+
+    <app-social-links class="site-footer__social" />
+  </div>
+
+  <nav class="site-footer__legal" aria-label="Rechtliches">
+    <a class="site-footer__link" routerLink="/impressum">{{ footer().legalNotice }}</a>
+    <a class="site-footer__link" routerLink="/datenschutz">{{ footer().privacyPolicy }}</a>
+  </nav>
+</footer>

@@ -1,59 +1,129 @@
-# PortfolioDeveloperAkademie
+# Portfolio – Danny Gruchmann
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.18.
+Persönliches Entwickler-Portfolio, umgesetzt nach der Figma-Vorlage der Developer Akademie.
+Angular 21 (standalone, zoneless), SCSS, kein SSR, zweisprachig DE/EN.
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Befehle
 
 ```bash
-ng generate component component-name
+npm start        # Dev-Server auf http://localhost:4200
+npm run build    # Production-Build nach dist/
+npm test         # Unit-Tests (Vitest)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Einzelne Testdatei: `ng test --include='**/pfad/zur/datei.spec.ts'`
 
-```bash
-ng generate --help
+## Wo du was änderst
+
+| Was                             | Datei                                              |
+| ------------------------------- | -------------------------------------------------- |
+| Deutsche Texte                  | `src/app/core/content/content.de.ts`               |
+| Englische Texte                 | `src/app/core/content/content.en.ts`               |
+| Projekte, Links, Social-Profile | `src/app/core/content/projects.ts`                 |
+| Impressum, Datenschutz          | `src/app/core/content/legal.de.ts` / `legal.en.ts` |
+| Skill-Liste und Icons           | `src/app/core/content/skills.ts`                   |
+| Badge-Icons „Über mich"         | `public/icons/` (location, remote, relocate)       |
+| Deko-Kreise im Hintergrund      | `public/img/Ellipse.svg` (eine Datei für alle)     |
+| Farben, Schriftgrößen, Abstände | `src/styles/_variables.scss`                       |
+| Webhook des Kontaktformulars    | `src/environments/environment.ts`                  |
+
+## Vor dem Livegang zu erledigen
+
+1. **Impressum vervollständigen** — in `legal.de.ts` und `legal.en.ts` stehen `[Straße und Hausnummer]`,
+   `[PLZ]` und `[Telefonnummer]` als Platzhalter. Ohne echte Angaben ist das Impressum unvollständig
+   (§ 5 DDG).
+2. **Links eintragen** — in `projects.ts` stehen `liveUrl` und `repoUrl` je Projekt auf `null`.
+   Solange sie leer sind, zeigt die Seite statt der Buttons den Hinweis „Links folgen".
+   Ebenso die GitHub- und LinkedIn-Adressen in `SOCIAL_LINKS` prüfen.
+3. **Viertes Projekt** — der Eintrag mit `isPlaceholder: true` in `projects.ts` austauschen und ein
+   Bild nach `public/img/projects/` legen (1200 × 750, WebP, unter 500 KB).
+4. **Webhook eintragen** — siehe unten.
+
+## Kontaktformular an n8n anbinden
+
+Das Formular schickt ein JSON-POST an einen n8n-Webhook. Der Versand der Mail passiert in n8n,
+nicht im Browser — so steht kein Mail-Zugang im ausgelieferten JavaScript.
+
+**Schritt 1 – Workflow in n8n anlegen** (auf deinem Hetzner-Server):
+
+1. Node **Webhook**: Methode `POST`, Pfad z. B. `portfolio-kontakt`, Response Mode
+   `Using Respond to Webhook Node`.
+2. Node **Respond to Webhook**: Response Code `200`. Unter _Response Headers_ eintragen:
+
+   | Header                         | Wert                      |
+   | ------------------------------ | ------------------------- |
+   | `Access-Control-Allow-Origin`  | `https://deine-domain.de` |
+   | `Access-Control-Allow-Methods` | `POST, OPTIONS`           |
+   | `Access-Control-Allow-Headers` | `Content-Type`            |
+
+   Ohne diese Header blockiert der Browser die Anfrage (CORS). Für lokale Tests zusätzlich
+   `http://localhost:4200` erlauben oder vorübergehend `*` setzen.
+
+3. Node **Send Email** (SMTP) mit den Zugangsdaten von Brevo:
+
+   | Feld            | Wert                                  |
+   | --------------- | ------------------------------------- |
+   | Host            | `smtp-relay.brevo.com`                |
+   | Port            | `587`                                 |
+   | SSL/TLS         | aus, STARTTLS an                      |
+   | User / Passwort | aus Brevo unter _SMTP & API_ → _SMTP_ |
+
+   Betreff und Text aus den Feldern des Webhooks zusammensetzen, zum Beispiel
+   `Neue Nachricht von {{ $json.body.name }}` mit `{{ $json.body.email }}` als Reply-To.
+
+**Schritt 2 – URL im Projekt eintragen:**
+
+```ts
+// src/environments/environment.ts
+contactWebhookUrl: 'https://n8n.deine-domain.de/webhook/portfolio-kontakt',
 ```
 
-## Building
+Solange das Feld leer ist, zeigt das Formular nach dem Absenden eine Fehlermeldung an,
+statt ins Leere zu senden.
 
-To build the project run:
+**Spam-Schutz:** Das Formular enthält ein verstecktes Feld (`website`). Menschen sehen es nicht,
+Bots füllen es aus. Ist es befüllt, sendet der Browser gar nicht erst. In n8n kannst du zusätzlich
+einen IF-Node vorschalten, der Anfragen mit befülltem Feld verwirft.
 
-```bash
-ng build
+**Brevo kostenlos:** 300 Mails pro Tag, Server in der EU. Die Domain muss einmalig verifiziert
+werden (SPF- und DKIM-Einträge im DNS), sonst landen die Mails im Spam.
+
+## Struktur
+
+```
+src/
+  styles/                  globale SCSS-Partials, aus jeder Komponente per @use erreichbar
+    _variables.scss        Breakpoints (SCSS) + Design-Tokens (CSS Custom Properties)
+    _mixins.scss           respond-to(), content-container, visually-hidden, focus-ring
+    _reset.scss            moderner Reset inkl. prefers-reduced-motion
+    _buttons.scss          globale Button-Klassen
+  app/
+    core/
+      content/             alle Texte, Projekte, Skills, Icon-Pfade
+      i18n/                LanguageService (Signals, localStorage)
+      services/            ContactService
+    layout/                Header mit Burger-Overlay, Footer
+    features/
+      home/sections/       Hero, About, Skills, Projects, Contact
+      legal/               Impressum und Datenschutz auf gemeinsamem Seitenlayout
+    shared/components/     Logo, Icon, Social-Links, Go-up-Button, 404
+public/                    statische Assets, landen im Build-Root
+docs/figma-specs/          vermessene Design-Specs und Referenzbilder aus Figma
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Konventionen
 
-## Running unit tests
+- Import-Alias `@/` zeigt auf `src/app`
+- SCSS-Partials ohne Pfad importierbar: `@use 'mixins' as *;`
+  (über `stylePreprocessorOptions.includePaths` in `angular.json`)
+- Klassen nach BEM, gestylt wird ausschließlich über Klassen – nie über Tags oder IDs
+- Design-Tokens als CSS Custom Properties, keine verstreuten Hex-Werte
+- Breakpoints bleiben SCSS-Variablen, weil Custom Properties in `@media` nicht funktionieren
+- Schrift Nunito, selbst gehostet über `@fontsource/nunito` (kein Google-CDN, siehe Datenschutz)
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Design-Referenz
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Die Vorlage liegt als vermessene Spec in `docs/figma-specs/`. Die Markdown-Dateien enthalten
+Maße, Farben, Typografie und Texte je Section, `figma-metadata.xml` die vollständige
+Geometrie aller Frames. Die Referenzbilder unter `docs/figma-specs/img/` sind bewusst nicht
+versioniert.

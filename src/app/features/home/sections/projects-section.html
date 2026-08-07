@@ -1,0 +1,73 @@
+<section class="projects" id="projects" aria-labelledby="projects-title">
+  <span class="projects__circle projects__circle--one" aria-hidden="true"></span>
+  <span class="projects__circle projects__circle--two" aria-hidden="true"></span>
+  <span class="projects__circle projects__circle--three" aria-hidden="true"></span>
+
+  <div class="projects__head">
+    <h2 class="projects__title" id="projects-title">{{ content().title }}</h2>
+    <p class="projects__intro">{{ content().intro }}</p>
+  </div>
+
+  <ol class="projects__list">
+    @for (project of projects(); track project.id) {
+      <li class="projects__row" [class.projects__row--reversed]="!project.isImageFirst">
+        <div class="projects__media">
+          <img
+            class="projects__image"
+            [src]="'/img/projects/' + project.imageBase + '.webp'"
+            [srcset]="
+              '/img/projects/' +
+              project.imageBase +
+              '-480.webp 480w, ' +
+              '/img/projects/' +
+              project.imageBase +
+              '-800.webp 800w, ' +
+              '/img/projects/' +
+              project.imageBase +
+              '-1200.webp 1200w'
+            "
+            sizes="(min-width: 64rem) 50vw, 100vw"
+            width="1200"
+            height="675"
+            [alt]="project.imageAlt"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="projects__text">
+          <h3 class="projects__name">{{ project.name }}</h3>
+          <p class="projects__tech">{{ project.techLine }}</p>
+          <p class="projects__description">{{ project.description }}</p>
+
+          <div class="projects__actions">
+            @if (project.liveUrl) {
+              <a
+                class="button button--primary projects__button"
+                [href]="project.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ content().liveLabel }}
+              </a>
+            }
+            @if (project.repoUrl) {
+              <a
+                class="button button--secondary projects__button"
+                [href]="project.repoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ content().repoLabel }}
+              </a>
+            }
+            @if (!project.liveUrl && !project.repoUrl) {
+              <!-- Links sind in projects.ts noch nicht gesetzt. -->
+              <span class="projects__pending">{{ content().linksPendingNote }}</span>
+            }
+          </div>
+        </div>
+      </li>
+    }
+  </ol>
+</section>
