@@ -10,9 +10,8 @@ export const environment = {
 
   /**
    * n8n-Webhook, an den das Kontaktformular sendet.
-   * Leer lassen, solange der Workflow noch nicht steht — das Formular zeigt dann
-   * eine Fehlermeldung statt ins Leere zu senden.
-   * Beispiel: 'https://n8n.deine-domain.de/webhook/portfolio-kontakt'
+   * Solange der Workflow in n8n nicht aktiv ist, antwortet der Pfad mit 404 und
+   * das Formular zeigt seine Fehlermeldung.
    */
-  contactWebhookUrl: '',
+  contactWebhookUrl: 'https://n8n.dannygruchmann.com/webhook/portfolio-kontakt',
 };

@@ -1,0 +1,128 @@
+{
+  "name": "Portfolio Kontaktformular",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "portfolio-kontakt",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "https://dannygruchmann.com,https://www.dannygruchmann.com"
+        }
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "portfolio-kontakt"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? {};\n\nconst name = String(body.name ?? '').trim();\nconst email = String(body.email ?? '').trim();\nconst message = String(body.message ?? '').trim();\nconst website = String(body.website ?? '').trim();\nconst language = body.language === 'en' ? 'en' : 'de';\n\n// Honeypot: only bots fill this hidden field\nif (website !== '') {\n  return [{ json: { accepted: false, reason: 'honeypot' } }];\n}\n\nconst emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/;\n\nif (name.length < 2 || message.length < 10 || !emailPattern.test(email)) {\n  return [{ json: { accepted: false, reason: 'validation' } }];\n}\n\n// Cap lengths so an oversized payload cannot bloat the outgoing mail\nreturn [\n  {\n    json: {\n      accepted: true,\n      name: name.slice(0, 100),\n      email: email.slice(0, 200),\n      message: message.slice(0, 5000),\n      language,\n      receivedAt: new Date().toISOString(),\n    },\n  },\n];"
+      },
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "Validieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "accepted-check",
+              "leftValue": "={{ $json.accepted }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Gueltig?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "fromEmail": "kontakt@dannygruchmann.com",
+        "toEmail": "danny.grmn@icloud.com",
+        "subject": "=Kontaktformular: {{ $json.name }}",
+        "emailFormat": "text",
+        "text": "=Neue Nachricht über dannygruchmann.com\n\nName:    {{ $json.name }}\nE-Mail:  {{ $json.email }}\nSprache: {{ $json.language }}\nZeit:    {{ $json.receivedAt }}\n\nNachricht:\n{{ $json.message }}\n",
+        "options": {
+          "replyTo": "={{ $json.email }}"
+        }
+      },
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "name": "Mail an mich",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [660, -100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "name": "Antwort OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [880, -100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: false }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "a1b2c3d4-0006-4000-8000-000000000006",
+      "name": "Antwort abgelehnt",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [660, 120]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Validieren", "type": "main", "index": 0 }]]
+    },
+    "Validieren": {
+      "main": [[{ "node": "Gueltig?", "type": "main", "index": 0 }]]
+    },
+    "Gueltig?": {
+      "main": [
+        [{ "node": "Mail an mich", "type": "main", "index": 0 }],
+        [{ "node": "Antwort abgelehnt", "type": "main", "index": 0 }]
+      ]
+    },
+    "Mail an mich": {
+      "main": [[{ "node": "Antwort OK", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
