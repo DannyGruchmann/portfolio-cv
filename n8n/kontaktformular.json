@@ -10,22 +10,28 @@
           "allowedOrigins": "https://dannygruchmann.com,https://www.dannygruchmann.com"
         }
       },
-      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "id": "16526586-e1a0-49a3-9532-2f494ab7a982",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [0, 0],
+      "position": [
+        624,
+        288
+      ],
       "webhookId": "portfolio-kontakt"
     },
     {
       "parameters": {
         "jsCode": "const body = $input.first().json.body ?? {};\n\nconst name = String(body.name ?? '').trim();\nconst email = String(body.email ?? '').trim();\nconst message = String(body.message ?? '').trim();\nconst website = String(body.website ?? '').trim();\nconst language = body.language === 'en' ? 'en' : 'de';\n\n// Honeypot: only bots fill this hidden field\nif (website !== '') {\n  return [{ json: { accepted: false, reason: 'honeypot' } }];\n}\n\nconst emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/;\n\nif (name.length < 2 || message.length < 10 || !emailPattern.test(email)) {\n  return [{ json: { accepted: false, reason: 'validation' } }];\n}\n\n// Cap lengths so an oversized payload cannot bloat the outgoing mail\nreturn [\n  {\n    json: {\n      accepted: true,\n      name: name.slice(0, 100),\n      email: email.slice(0, 200),\n      message: message.slice(0, 5000),\n      language,\n      receivedAt: new Date().toISOString(),\n    },\n  },\n];"
       },
-      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "id": "adaa918f-61dd-42e1-9721-2086ae8fe64c",
       "name": "Validieren",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [220, 0]
+      "position": [
+        848,
+        288
+      ]
     },
     {
       "parameters": {
@@ -52,28 +58,71 @@
         },
         "options": {}
       },
-      "id": "a1b2c3d4-0003-4000-8000-000000000003",
-      "name": "Gueltig?",
+      "id": "ddb8236e-98aa-4afc-a64c-dbc8eee83402",
+      "name": "Gültig?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [440, 0]
+      "position": [
+        1072,
+        288
+      ]
     },
     {
       "parameters": {
-        "fromEmail": "kontakt@dannygruchmann.com",
-        "toEmail": "danny.grmn@icloud.com",
-        "subject": "=Kontaktformular: {{ $json.name }}",
-        "emailFormat": "text",
-        "text": "=Neue Nachricht über dannygruchmann.com\n\nName:    {{ $json.name }}\nE-Mail:  {{ $json.email }}\nSprache: {{ $json.language }}\nZeit:    {{ $json.receivedAt }}\n\nNachricht:\n{{ $json.message }}\n",
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ sender: { name: 'Portfolio Kontaktformular', email: 'kontakt@dannygruchmann.com' }, to: [{ email: 'danny.grmnn@gmail.com' }], replyTo: { email: $json.email, name: $json.name }, subject: 'Kontaktformular: ' + $json.name, textContent: 'Neue Nachricht über dannygruchmann.com\\n\\nName:    ' + $json.name + '\\nE-Mail:  ' + $json.email + '\\nSprache: ' + $json.language + '\\nZeit:    ' + $json.receivedAt + '\\n\\nNachricht:\\n' + $json.message }) }}",
         "options": {
-          "replyTo": "={{ $json.email }}"
+          "timeout": 15000
         }
       },
-      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "id": "c88ab55b-5e6e-47ed-b841-8545749e9db9",
       "name": "Mail an mich",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [660, -100]
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1280,
+        176
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "LcMfyGMjQAj2hypb",
+          "name": "Header Auth account/ Brevo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ sender: { name: 'Danny Gruchmann', email: 'kontakt@dannygruchmann.com' }, to: [{ email: $('Validieren').item.json.email, name: $('Validieren').item.json.name }], replyTo: { email: 'danny.grmnn@gmail.com', name: 'Danny Gruchmann' }, subject: $('Validieren').item.json.language === 'de' ? 'Ihre Nachricht ist angekommen' : 'Your message has arrived', textContent: $('Validieren').item.json.language === 'de' ? ('Hallo ' + $('Validieren').item.json.name + ',\\n\\nvielen Dank für Ihre Nachricht. In der Regel melde ich mich noch am selben Tag.\\n\\nMit freundlichen Grüßen\\n\\nDanny Gruchmann\\n\\ndanny.grmnn@gmail.com\\nhttps://dannygruchmann.com\\n\\nDiese Bestätigung wurde automatisch versendet. Sie können direkt darauf antworten.') : ('Hi ' + $('Validieren').item.json.name + ',\\n\\nthank you for your message. It reached me and I usually reply the same day.\\n\\nBest regards\\n\\nDanny Gruchmann\\n\\ndanny.grmnn@gmail.com\\nhttps://dannygruchmann.com\\n\\nThis confirmation was sent automatically. You can reply to it directly.') }) }}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "54781075-23fa-4daa-aeca-59ce25c8b49f",
+      "name": "Bestätigung an Besucher",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1504,
+        176
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "LcMfyGMjQAj2hypb",
+          "name": "Header Auth account/ Brevo"
+        }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -83,11 +132,14 @@
           "responseCode": 200
         }
       },
-      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "id": "ba8d546d-599c-458b-8ca8-c9f57dc5b227",
       "name": "Antwort OK",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [880, -100]
+      "position": [
+        1728,
+        176
+      ]
     },
     {
       "parameters": {
@@ -97,32 +149,119 @@
           "responseCode": 400
         }
       },
-      "id": "a1b2c3d4-0006-4000-8000-000000000006",
+      "id": "96338399-0430-4ee6-a50d-6b2344192241",
       "name": "Antwort abgelehnt",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [660, 120]
+      "position": [
+        1280,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "errorMessage": "Email Eingabe ungültig "
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1488,
+        400
+      ],
+      "id": "7ced708d-1444-4be5-86ac-9838957aedf0",
+      "name": "Stop and Error"
     }
   ],
+  "pinData": {},
   "connections": {
     "Webhook": {
-      "main": [[{ "node": "Validieren", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Validieren",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Validieren": {
-      "main": [[{ "node": "Gueltig?", "type": "main", "index": 0 }]]
-    },
-    "Gueltig?": {
       "main": [
-        [{ "node": "Mail an mich", "type": "main", "index": 0 }],
-        [{ "node": "Antwort abgelehnt", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Gültig?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gültig?": {
+      "main": [
+        [
+          {
+            "node": "Mail an mich",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Antwort abgelehnt",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Mail an mich": {
-      "main": [[{ "node": "Antwort OK", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Bestätigung an Besucher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bestätigung an Besucher": {
+      "main": [
+        [
+          {
+            "node": "Antwort OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Antwort abgelehnt": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Europe/Berlin",
+    "callerPolicy": "workflowsFromSameOwner"
   },
-  "pinData": {}
+  "versionId": "d2919b07-3a1d-40e3-9292-de77e3899a05",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6a3ec7cbf99ae8f40f0cdb22a8ea56382d4e3b935cb48def9bdd58dba2a1e94f"
+  },
+  "id": "NtQbAao8Hbe8ECHv",
+  "tags": []
 }
