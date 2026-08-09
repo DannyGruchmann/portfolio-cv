@@ -8,6 +8,7 @@ import type {
   ProjectsContent,
   SkillsContent,
 } from './content.types';
+import { CONTACT_EMAIL } from './contact-details';
 
 export const NAV_EN: NavContent = {
   about: 'About me',
@@ -77,13 +78,13 @@ export const CONTACT_EN: ContactContent = {
   privacyError: 'Without your consent I am not allowed to process the message.',
   submitLabel: 'Send message',
   sendingLabel: 'Sending …',
-  successMessage: 'Thanks, your message arrived. I will get back to you.',
-  errorMessage:
-    'That did not work. Please try again later or write directly to danny.grmn@icloud.com.',
+  successMessage:
+    'Thanks, your message arrived. A confirmation will be in your inbox shortly — please check your spam folder if you cannot find it. I will get back to you.',
+  errorMessage: `That did not work. Please try again later or write directly to ${CONTACT_EMAIL}.`,
 };
 
 export const FOOTER_EN: FooterContent = {
-  legalNotice: 'About this site',
+  legalNotice: 'Legal notice',
   privacyPolicy: 'Privacy policy',
   goUpLabel: 'Back to top',
   socialLabel: 'Social networks',

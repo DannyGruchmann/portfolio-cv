@@ -8,6 +8,7 @@ import type {
   ProjectsContent,
   SkillsContent,
 } from './content.types';
+import { CONTACT_EMAIL } from './contact-details';
 
 export const NAV_DE: NavContent = {
   about: 'Über mich',
@@ -77,13 +78,13 @@ export const CONTACT_DE: ContactContent = {
   privacyError: 'Ohne Ihre Zustimmung darf ich die Nachricht nicht verarbeiten.',
   submitLabel: 'Nachricht senden',
   sendingLabel: 'Wird gesendet …',
-  successMessage: 'Danke, Ihre Nachricht ist angekommen. Ich melde mich.',
-  errorMessage:
-    'Das hat nicht geklappt. Versuchen Sie es später noch einmal oder schreiben Sie direkt an danny.grmn@icloud.com.',
+  successMessage:
+    'Danke, Ihre Nachricht ist angekommen. Eine Bestätigung liegt gleich in Ihrem Postfach — sehen Sie notfalls im Spam-Ordner nach. Ich melde mich.',
+  errorMessage: `Das hat nicht geklappt. Versuchen Sie es später noch einmal oder schreiben Sie direkt an ${CONTACT_EMAIL}.`,
 };
 
 export const FOOTER_DE: FooterContent = {
-  legalNotice: 'Angaben zur Website',
+  legalNotice: 'Impressum',
   privacyPolicy: 'Datenschutz',
   goUpLabel: 'Nach oben',
   socialLabel: 'Soziale Netzwerke',
