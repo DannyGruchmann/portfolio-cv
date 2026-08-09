@@ -1,7 +1,8 @@
 import type { LegalPageContent } from './content.types';
+import { CONTACT_EMAIL } from './contact-details';
 
 export const LEGAL_NOTICE_DE: LegalPageContent = {
-  title: 'Angaben zu dieser Website',
+  title: 'Impressum',
   sections: [
     {
       heading: 'Betreiber',
@@ -13,7 +14,7 @@ export const LEGAL_NOTICE_DE: LegalPageContent = {
     {
       heading: 'Kontakt',
       paragraphs: [
-        'E-Mail: danny.grmn@icloud.com',
+        `E-Mail: ${CONTACT_EMAIL}`,
         'Über das Kontaktformular auf dieser Website erreichst du mich ebenfalls direkt.',
       ],
     },
@@ -52,7 +53,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
     {
       heading: 'Verantwortlicher',
       paragraphs: [
-        'Verantwortlich für die Datenverarbeitung auf dieser Website ist:\nDanny Gruchmann\nAltenburg, Thüringen\nE-Mail: danny.grmn@icloud.com',
+        `Verantwortlich für die Datenverarbeitung auf dieser Website ist:\nDanny Gruchmann\nAltenburg, Thüringen\nE-Mail: ${CONTACT_EMAIL}`,
         'Ein Datenschutzbeauftragter ist gesetzlich nicht zu benennen. Bei allen Fragen zum Datenschutz wendest du dich direkt an mich.',
       ],
     },
@@ -69,6 +70,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
       heading: 'Kontaktformular',
       paragraphs: [
         'Wenn du mir über das Kontaktformular schreibst, werden dein Name, deine E-Mail-Adresse und deine Nachricht an eine Automatisierung auf meinem eigenen Server übermittelt (n8n, betrieben auf dem oben genannten Server in Deutschland) und von dort per E-Mail an mich weitergeleitet. Für den Versand dieser E-Mail nutze ich Brevo (Sendinblue GmbH, Köpenicker Straße 126, 10179 Berlin), dessen Server innerhalb der EU stehen. Auch mit Brevo besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.',
+        'Sobald deine Nachricht auf dem Weg zu mir ist, schickt dir die Automatisierung an dieselbe Adresse eine kurze Eingangsbestätigung. Sie geht nur heraus, wenn die Übermittlung an mich geklappt hat, und läuft über denselben Dienstleister.',
         'Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die du über die Checkbox im Formular erteilst.',
         'Die Angabe der Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne Name, E-Mail-Adresse und Nachricht kann ich deine Anfrage allerdings nicht beantworten. Du kannst mir stattdessen jederzeit direkt eine E-Mail schreiben.',
         'Das Formular enthält ein für dich unsichtbares Zusatzfeld, das im Normalfall leer bleibt und nur von automatisierten Anfragen ausgefüllt wird. Es dient allein der Spam-Abwehr. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse an einem funktionsfähigen Formular.',
@@ -112,7 +114,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
       heading: 'Deine Rechte',
       paragraphs: [
         'Du hast jederzeit das Recht auf Auskunft über die zu deiner Person gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung unrichtiger Daten (Art. 16 DSGVO), auf Löschung (Art. 17 DSGVO), auf Einschränkung der Verarbeitung (Art. 18 DSGVO) und auf Datenübertragbarkeit (Art. 20 DSGVO).',
-        'Für die Ausübung dieser Rechte genügt eine formlose E-Mail an danny.grmn@icloud.com. Ich beantworte deine Anfrage innerhalb eines Monats (Art. 12 Abs. 3 DSGVO).',
+        `Für die Ausübung dieser Rechte genügt eine formlose E-Mail an ${CONTACT_EMAIL}. Ich beantworte deine Anfrage innerhalb eines Monats (Art. 12 Abs. 3 DSGVO).`,
         'Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO). Zuständig ist der Thüringer Landesbeauftragte für den Datenschutz und die Informationsfreiheit, Häßlerstraße 8, 99096 Erfurt.',
       ],
     },
@@ -120,7 +122,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
       heading: 'Widerspruchsrecht',
       paragraphs: [
         'Soweit ich Daten auf Grundlage eines berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO verarbeite — das betrifft die Server-Logfiles und die Spam-Abwehr des Kontaktformulars — hast du das Recht, aus Gründen, die sich aus deiner besonderen Situation ergeben, jederzeit Widerspruch gegen diese Verarbeitung einzulegen (Art. 21 Abs. 1 DSGVO).',
-        'Ein formloser Widerspruch per E-Mail an danny.grmn@icloud.com genügt. Ich verarbeite die betroffenen Daten dann nicht mehr, es sei denn, ich kann zwingende schutzwürdige Gründe nachweisen, die deine Interessen, Rechte und Freiheiten überwiegen.',
+        `Ein formloser Widerspruch per E-Mail an ${CONTACT_EMAIL} genügt. Ich verarbeite die betroffenen Daten dann nicht mehr, es sei denn, ich kann zwingende schutzwürdige Gründe nachweisen, die deine Interessen, Rechte und Freiheiten überwiegen.`,
       ],
     },
     {

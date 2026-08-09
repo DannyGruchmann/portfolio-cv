@@ -1,7 +1,8 @@
 import type { LegalPageContent } from './content.types';
+import { CONTACT_EMAIL } from './contact-details';
 
 export const LEGAL_NOTICE_EN: LegalPageContent = {
-  title: 'About this website',
+  title: 'Legal notice',
   sections: [
     {
       heading: 'Operator',
@@ -13,7 +14,7 @@ export const LEGAL_NOTICE_EN: LegalPageContent = {
     {
       heading: 'Contact',
       paragraphs: [
-        'Email: danny.grmn@icloud.com',
+        `Email: ${CONTACT_EMAIL}`,
         'You can also reach me directly through the contact form on this website.',
       ],
     },
@@ -52,7 +53,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
     {
       heading: 'Controller',
       paragraphs: [
-        'The controller for data processing on this website is:\nDanny Gruchmann\nAltenburg, Thuringia, Germany\nEmail: danny.grmn@icloud.com',
+        `The controller for data processing on this website is:\nDanny Gruchmann\nAltenburg, Thuringia, Germany\nEmail: ${CONTACT_EMAIL}`,
         'There is no legal requirement to appoint a data protection officer. For any question about data protection, please contact me directly.',
       ],
     },
@@ -69,6 +70,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
       heading: 'Contact form',
       paragraphs: [
         'When you write to me through the contact form, your name, email address and message are transmitted to an automation running on my own server (n8n, hosted on the server named above in Germany) and forwarded from there to me by email. To send that email I use Brevo (Sendinblue GmbH, Köpenicker Straße 126, 10179 Berlin, Germany), whose servers are located within the EU. A data processing agreement pursuant to Art. 28 GDPR is in place with Brevo as well.',
+        'Once your message is on its way to me, the automation sends a short acknowledgement to the same address. It only goes out if the transmission to me succeeded, and it uses the same provider.',
         'The legal basis is your consent under Art. 6 (1) (a) GDPR, given via the checkbox in the form.',
         'Providing this data is neither required by law nor by contract. Without your name, email address and message, however, I cannot answer your enquiry. You are welcome to send me an email directly instead.',
         'The form contains an additional field that is invisible to you, normally stays empty and is only filled in by automated requests. It serves spam protection only. The legal basis is Art. 6 (1) (f) GDPR, my legitimate interest in keeping the form usable.',
@@ -112,7 +114,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
       heading: 'Your rights',
       paragraphs: [
         'You have the right at any time to information about the data stored about you (Art. 15 GDPR), to rectification of inaccurate data (Art. 16 GDPR), to erasure (Art. 17 GDPR), to restriction of processing (Art. 18 GDPR) and to data portability (Art. 20 GDPR).',
-        'An informal email to danny.grmn@icloud.com is enough to exercise these rights. I will respond within one month (Art. 12 (3) GDPR).',
+        `An informal email to ${CONTACT_EMAIL} is enough to exercise these rights. I will respond within one month (Art. 12 (3) GDPR).`,
         'You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR). The competent authority is the Thuringian Commissioner for Data Protection and Freedom of Information, Häßlerstraße 8, 99096 Erfurt, Germany.',
       ],
     },
@@ -120,7 +122,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
       heading: 'Right to object',
       paragraphs: [
         'Where I process data on the basis of a legitimate interest under Art. 6 (1) (f) GDPR — this concerns the server log files and the spam protection of the contact form — you have the right to object to that processing at any time on grounds relating to your particular situation (Art. 21 (1) GDPR).',
-        'An informal objection by email to danny.grmn@icloud.com is sufficient. I will then stop processing the data concerned unless I can demonstrate compelling legitimate grounds that override your interests, rights and freedoms.',
+        `An informal objection by email to ${CONTACT_EMAIL} is sufficient. I will then stop processing the data concerned unless I can demonstrate compelling legitimate grounds that override your interests, rights and freedoms.`,
       ],
     },
     {
