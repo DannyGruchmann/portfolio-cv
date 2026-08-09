@@ -1,6 +1,5 @@
 import type { Project, SocialLink } from './content.types';
-
-export const CONTACT_EMAIL = 'danny.grmn@icloud.com';
+import { CONTACT_EMAIL } from './contact-details';
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   {
