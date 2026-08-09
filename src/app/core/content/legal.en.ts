@@ -1,14 +1,14 @@
 import type { LegalPageContent } from './content.types';
 
-// Spiegelbild von legal.de.ts. Aenderungen immer in beiden Dateien nachziehen —
-// die offenen Platzhalter fuer Strasse und PLZ stehen auch hier.
-
 export const LEGAL_NOTICE_EN: LegalPageContent = {
-  title: 'Legal notice',
+  title: 'About this website',
   sections: [
     {
-      heading: 'Information according to § 5 DDG',
-      paragraphs: ['Danny Gruchmann\n[Street and number]\n[Postcode] Altenburg\nGermany'],
+      heading: 'Operator',
+      paragraphs: [
+        'Danny Gruchmann\nAltenburg, Thuringia\nGermany',
+        'This website is my personal portfolio. It introduces me, my skills and my projects, and is aimed at companies looking to hire a software developer. It does not offer any goods or services.',
+      ],
     },
     {
       heading: 'Contact',
@@ -18,20 +18,8 @@ export const LEGAL_NOTICE_EN: LegalPageContent = {
       ],
     },
     {
-      heading: 'VAT',
-      paragraphs: [
-        'As a small business under § 19 (1) of the German VAT Act, no VAT is charged and none is shown on invoices.',
-      ],
-    },
-    {
-      heading: 'Responsible for content under § 18 (2) MStV',
-      paragraphs: ['Danny Gruchmann, address as above.'],
-    },
-    {
-      heading: 'Consumer dispute resolution',
-      paragraphs: [
-        'I am neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.',
-      ],
+      heading: 'Responsible for content',
+      paragraphs: ['Danny Gruchmann, contact details as above.'],
     },
     {
       heading: 'Liability for content',
@@ -64,7 +52,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
     {
       heading: 'Controller',
       paragraphs: [
-        'The controller for data processing on this website is:\nDanny Gruchmann\n[Street and number]\n[Postcode] Altenburg, Germany\nEmail: danny.grmn@icloud.com',
+        'The controller for data processing on this website is:\nDanny Gruchmann\nAltenburg, Thuringia, Germany\nEmail: danny.grmn@icloud.com',
         'There is no legal requirement to appoint a data protection officer. For any question about data protection, please contact me directly.',
       ],
     },
@@ -81,7 +69,7 @@ export const PRIVACY_POLICY_EN: LegalPageContent = {
       heading: 'Contact form',
       paragraphs: [
         'When you write to me through the contact form, your name, email address and message are transmitted to an automation running on my own server (n8n, hosted on the server named above in Germany) and forwarded from there to me by email. To send that email I use Brevo (Sendinblue GmbH, Köpenicker Straße 126, 10179 Berlin, Germany), whose servers are located within the EU. A data processing agreement pursuant to Art. 28 GDPR is in place with Brevo as well.',
-        'The legal basis is your consent under Art. 6 (1) (a) GDPR, given via the checkbox in the form, and Art. 6 (1) (b) GDPR where the enquiry is aimed at entering into a contract.',
+        'The legal basis is your consent under Art. 6 (1) (a) GDPR, given via the checkbox in the form.',
         'Providing this data is neither required by law nor by contract. Without your name, email address and message, however, I cannot answer your enquiry. You are welcome to send me an email directly instead.',
         'The form contains an additional field that is invisible to you, normally stays empty and is only filled in by automated requests. It serves spam protection only. The legal basis is Art. 6 (1) (f) GDPR, my legitimate interest in keeping the form usable.',
         'The data stays with me until your enquiry has been dealt with and is deleted afterwards, unless statutory retention periods apply. You can withdraw your consent at any time without formality, for example by email. The lawfulness of processing carried out before the withdrawal remains unaffected.',

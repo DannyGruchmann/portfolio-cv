@@ -83,7 +83,7 @@ export const CONTACT_EN: ContactContent = {
 };
 
 export const FOOTER_EN: FooterContent = {
-  legalNotice: 'Legal notice',
+  legalNotice: 'About this site',
   privacyPolicy: 'Privacy policy',
   goUpLabel: 'Back to top',
   socialLabel: 'Social networks',

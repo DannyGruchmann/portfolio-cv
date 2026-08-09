@@ -11,7 +11,7 @@ export const routes: Routes = [
   {
     path: 'impressum',
     loadComponent: () => import('@/features/legal/legal-notice').then((m) => m.LegalNotice),
-    title: `Impressum – ${SITE_NAME}`,
+    title: `Angaben zur Website – ${SITE_NAME}`,
   },
   {
     path: 'datenschutz',

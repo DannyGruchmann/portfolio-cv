@@ -83,7 +83,7 @@ export const CONTACT_DE: ContactContent = {
 };
 
 export const FOOTER_DE: FooterContent = {
-  legalNotice: 'Impressum',
+  legalNotice: 'Angaben zur Website',
   privacyPolicy: 'Datenschutz',
   goUpLabel: 'Nach oben',
   socialLabel: 'Soziale Netzwerke',

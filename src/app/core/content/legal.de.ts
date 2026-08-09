@@ -1,28 +1,14 @@
 import type { LegalPageContent } from './content.types';
 
-// ==========================================================================
-// OFFEN VOR DEM LIVEGANG: Strasse, Hausnummer und PLZ.
-// Die ladungsfaehige Anschrift ist nach § 5 Abs. 1 Nr. 1 DDG Pflicht, ein
-// Postfach genuegt nicht. Ohne sie ist das Impressum unvollstaendig und
-// abmahnbar. Beide Stellen (Impressum und Datenschutz) muessen gefuellt werden.
-//
-// Bewusst NICHT enthalten:
-//   Telefonnummer — § 5 Abs. 1 Nr. 2 DDG verlangt einen Weg zur schnellen
-//   elektronischen Kontaktaufnahme, nicht zwingend ein Telefon (EuGH,
-//   10.07.2019, C-649/17). E-Mail plus Kontaktformular erfuellen das. Wer die
-//   Nummer trotzdem nennen will, ergaenzt sie im Abschnitt "Kontakt".
-//
-//   Link auf die OS-Plattform der EU-Kommission — die Plattform wurde zum
-//   20.07.2025 eingestellt und die zugrundeliegende ODR-Verordnung aufgehoben.
-//   Ein Verweis darauf ginge heute ins Leere.
-// ==========================================================================
-
 export const LEGAL_NOTICE_DE: LegalPageContent = {
-  title: 'Impressum',
+  title: 'Angaben zu dieser Website',
   sections: [
     {
-      heading: 'Angaben gemäß § 5 DDG',
-      paragraphs: ['Danny Gruchmann\n[Straße und Hausnummer]\n[PLZ] Altenburg\nDeutschland'],
+      heading: 'Betreiber',
+      paragraphs: [
+        'Danny Gruchmann\nAltenburg, Thüringen\nDeutschland',
+        'Diese Website ist mein persönliches Portfolio. Sie stellt mich, meine Fähigkeiten und meine Projekte vor und richtet sich an Unternehmen, die eine Softwareentwicklerin oder einen Softwareentwickler suchen. Sie bietet keine Waren oder Dienstleistungen an.',
+      ],
     },
     {
       heading: 'Kontakt',
@@ -32,20 +18,8 @@ export const LEGAL_NOTICE_DE: LegalPageContent = {
       ],
     },
     {
-      heading: 'Umsatzsteuer',
-      paragraphs: [
-        'Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet und daher auch nicht ausgewiesen.',
-      ],
-    },
-    {
-      heading: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
-      paragraphs: ['Danny Gruchmann, Anschrift wie oben.'],
-    },
-    {
-      heading: 'Verbraucherstreitbeilegung',
-      paragraphs: [
-        'Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
-      ],
+      heading: 'Verantwortlich für den Inhalt',
+      paragraphs: ['Danny Gruchmann, Kontakt wie oben.'],
     },
     {
       heading: 'Haftung für Inhalte',
@@ -78,7 +52,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
     {
       heading: 'Verantwortlicher',
       paragraphs: [
-        'Verantwortlich für die Datenverarbeitung auf dieser Website ist:\nDanny Gruchmann\n[Straße und Hausnummer]\n[PLZ] Altenburg\nE-Mail: danny.grmn@icloud.com',
+        'Verantwortlich für die Datenverarbeitung auf dieser Website ist:\nDanny Gruchmann\nAltenburg, Thüringen\nE-Mail: danny.grmn@icloud.com',
         'Ein Datenschutzbeauftragter ist gesetzlich nicht zu benennen. Bei allen Fragen zum Datenschutz wendest du dich direkt an mich.',
       ],
     },
@@ -95,7 +69,7 @@ export const PRIVACY_POLICY_DE: LegalPageContent = {
       heading: 'Kontaktformular',
       paragraphs: [
         'Wenn du mir über das Kontaktformular schreibst, werden dein Name, deine E-Mail-Adresse und deine Nachricht an eine Automatisierung auf meinem eigenen Server übermittelt (n8n, betrieben auf dem oben genannten Server in Deutschland) und von dort per E-Mail an mich weitergeleitet. Für den Versand dieser E-Mail nutze ich Brevo (Sendinblue GmbH, Köpenicker Straße 126, 10179 Berlin), dessen Server innerhalb der EU stehen. Auch mit Brevo besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.',
-        'Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die du über die Checkbox im Formular erteilst, sowie Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage auf einen Vertragsabschluss zielt.',
+        'Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO, die du über die Checkbox im Formular erteilst.',
         'Die Angabe der Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne Name, E-Mail-Adresse und Nachricht kann ich deine Anfrage allerdings nicht beantworten. Du kannst mir stattdessen jederzeit direkt eine E-Mail schreiben.',
         'Das Formular enthält ein für dich unsichtbares Zusatzfeld, das im Normalfall leer bleibt und nur von automatisierten Anfragen ausgefüllt wird. Es dient allein der Spam-Abwehr. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse an einem funktionsfähigen Formular.',
         'Die Daten verbleiben bei mir, bis die Anfrage abschließend bearbeitet ist, und werden anschließend gelöscht, sofern keine gesetzlichen Aufbewahrungsfristen entgegenstehen. Du kannst deine Einwilligung jederzeit formlos widerrufen, etwa per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.',
