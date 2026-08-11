@@ -68,7 +68,7 @@ export const PROJECTS: readonly Project[] = [
       de: 'Screenshot der Rezeptansicht von Code A Cuisine',
       en: 'Screenshot of the Code A Cuisine recipe view',
     },
-    liveUrl: 'https://code-a-cuisine.pages.dev',
+    liveUrl: 'https://code-a-cuisine.dannygruchmann.com',
     repoUrl: 'https://github.com/DannyGruchmann/code-a-cuisine1.0',
   },
   {
@@ -84,7 +84,7 @@ export const PROJECTS: readonly Project[] = [
       de: 'Screenshot der Famora-Checkliste mit Fortschrittsanzeige und Aufgaben samt Fristen',
       en: 'Screenshot of the Famora checklist with progress indicator and tasks with deadlines',
     },
-    liveUrl: null,
+    liveUrl: 'https://famora.dannygruchmann.com',
     repoUrl: 'https://github.com/DannyGruchmann/famora',
   },
 ];
