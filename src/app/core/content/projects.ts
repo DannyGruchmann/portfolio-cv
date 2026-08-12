@@ -16,7 +16,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   },
   {
     id: 'linkedin',
-    url: 'https://www.linkedin.com/in/dannygruchmann',
+    url: 'https://www.linkedin.com/in/danny-gruchmann-9975143a0/',
     label: 'LinkedIn',
     icon: '/icons/social/linkedin.svg',
   },
