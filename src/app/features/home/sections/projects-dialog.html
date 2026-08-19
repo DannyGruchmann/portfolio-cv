@@ -1,0 +1,81 @@
+<dialog
+  #dialog
+  class="projects-dialog"
+  aria-labelledby="projects-dialog-title"
+  (click)="closeOnBackdropClick($event)"
+  (close)="onClose()"
+>
+  <header class="projects-dialog__head">
+    <div class="projects-dialog__headings">
+      <h2 class="projects-dialog__title" id="projects-dialog-title">{{ content().dialogTitle }}</h2>
+      <p class="projects-dialog__intro">{{ content().dialogIntro }}</p>
+    </div>
+
+    <button
+      class="projects-dialog__close"
+      type="button"
+      autofocus
+      [attr.aria-label]="content().closeLabel"
+      (click)="close()"
+    >
+      <app-icon [path]="closeIconPath" [size]="20" />
+    </button>
+  </header>
+
+  <div class="projects-dialog__tabs" role="tablist">
+    @for (group of groups(); track group.category) {
+    <button class="projects-dialog__tab" type="button" role="tab" [class.projects-dialog__tab--active]="activeTab() === group.category"
+      [attr.aria-selected]="activeTab() === group.category" [attr.aria-controls]="'panel-' + group.category"
+      (click)="selectTab(group.category)">
+      <span class="projects-dialog__tab-label">{{ group.label }}</span>
+      <span class="projects-dialog__tab-count">{{ group.projects.length }}</span>
+    </button>
+    }
+  </div>
+
+  <div class="projects-dialog__body" role="tabpanel" [id]="'panel-' + activeTab()">
+    <ul class="projects-dialog__grid">
+      @for (project of activeProjects(); track project.id) {
+      <li class="project-card">
+          <img class="project-card__image" [src]="'/img/projects/' + project.imageBase + '.webp'" [srcset]="
+                '/img/projects/' +
+                project.imageBase +
+                '-480.webp 480w, ' +
+                '/img/projects/' +
+                project.imageBase +
+                '-800.webp 800w'
+              " sizes="(min-width: 90rem) 21rem, (min-width: 48rem) 32rem, 90vw" width="800" height="450"
+            [alt]="project.imageAlt" loading="lazy" decoding="async" />
+
+          @if (project.isClientProject) {
+          <span class="project-card__badge">{{ content().clientBadgeLabel }}</span>
+          }
+
+          <div class="project-card__text">
+            <h4 class="project-card__name">{{ project.name }}</h4>
+            <p class="project-card__tech">{{ project.techLine }}</p>
+            <p class="project-card__description">{{ project.description }}</p>
+          </div>
+
+          <div class="project-card__actions">
+            @if (project.liveUrl) {
+            <a class="button button--primary project-card__link" [href]="project.liveUrl" target="_blank"
+              rel="noopener noreferrer">
+              {{ content().liveLabel }}
+            </a>
+            }
+            @if (project.repoUrl) {
+            <a class="button button--secondary project-card__link" [href]="project.repoUrl" target="_blank"
+              rel="noopener noreferrer">
+              {{ content().repoLabel }}
+            </a>
+            }
+            @if (!project.liveUrl && !project.repoUrl) {
+            <span class="project-card__pending">{{ content().linksPendingNote }}</span>
+            }
+          </div>
+        </li>
+        }
+    </ul>
+  </div>
+</dialog>

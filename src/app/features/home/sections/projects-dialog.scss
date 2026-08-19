@@ -1,0 +1,312 @@
+@use 'mixins' as *;
+
+.projects-dialog {
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: none;
+  opacity: 0;
+  translate: 0 1.5rem;
+  transition:
+    opacity var(--transition-overlay),
+    translate var(--transition-overlay),
+    display var(--transition-overlay) allow-discrete,
+    overlay var(--transition-overlay) allow-discrete;
+
+  @include respond-to(md) {
+    width: min(100% - var(--space-12), 68rem);
+    height: auto;
+    max-height: min(86dvh, 54rem);
+    margin: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 1.5rem 4rem rgb(6 18 46 / 0.35);
+  }
+}
+
+.projects-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  translate: 0 0;
+}
+
+@starting-style {
+  .projects-dialog[open] {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+
+.projects-dialog::backdrop {
+  background-color: rgb(6 18 46 / 0.62);
+  opacity: 0;
+  transition:
+    opacity var(--transition-overlay),
+    display var(--transition-overlay) allow-discrete,
+    overlay var(--transition-overlay) allow-discrete;
+}
+
+.projects-dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .projects-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.projects-dialog__head {
+  display: flex;
+  flex: none;
+  gap: var(--space-4);
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-block-start: max(var(--space-6), env(safe-area-inset-top));
+  padding-block-end: var(--space-5);
+  padding-inline: var(--space-5);
+  background: var(--gradient-hero);
+
+  @include respond-to(md) {
+    padding-block: var(--space-8) var(--space-6);
+    padding-inline: var(--space-8);
+    border-start-start-radius: var(--radius-lg);
+    border-start-end-radius: var(--radius-lg);
+  }
+}
+
+.projects-dialog__tabs {
+  display: flex;
+  flex: none;
+  gap: var(--space-4);
+  padding-inline: var(--space-5);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background: var(--gradient-hero);
+  border-block-end: 1px solid var(--color-border);
+
+  @include respond-to(md) {
+    gap: var(--space-8);
+    padding-inline: var(--space-8);
+  }
+}
+
+.projects-dialog__tab {
+  position: relative;
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding-block: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--fs-300);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-block-end: 2px solid transparent;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    font-weight var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.projects-dialog__tab--active {
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+  border-block-end-color: var(--color-primary);
+}
+
+.projects-dialog__tab-label {
+  white-space: nowrap;
+}
+
+.projects-dialog__tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding-inline: var(--space-2);
+  font-size: var(--fs-100);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+  transition: color var(--transition-fast);
+
+  .projects-dialog__tab--active & {
+    color: var(--color-primary);
+  }
+}
+
+.projects-dialog__headings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.projects-dialog__title {
+  font-size: var(--fs-600);
+  color: var(--color-primary);
+}
+
+.projects-dialog__intro {
+  max-width: 38rem; // 608px
+  font-size: var(--fs-200);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+}
+
+.projects-dialog__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem; // 44px – minimum touch target
+  height: 2.75rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+.projects-dialog__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  padding-block-start: var(--space-6);
+  padding-block-end: max(var(--space-6), env(safe-area-inset-bottom));
+  padding-inline: var(--space-5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  @include respond-to(md) {
+    padding-block: var(--space-8);
+    padding-inline: var(--space-8);
+  }
+}
+
+.projects-dialog__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include respond-to(xl) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.project-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.project-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-100);
+  font-weight: var(--fw-regular);
+  color: rgb(74 74 74);
+  background-color: rgb(255 255 255 / 0.85);
+  border: 1px solid rgb(74 74 74 / 0.15);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  backdrop-filter: blur(4px);
+}
+
+.project-card__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.project-card__name {
+  font-size: calc(var(--fs-300) * var(--font-heading-scale));
+  color: var(--color-text);
+}
+
+.project-card__tech {
+  font-size: var(--fs-100);
+  color: var(--color-secondary);
+}
+
+.project-card__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: var(--fs-200);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+}
+
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-block-end: var(--space-4);
+  padding-inline: var(--space-4);
+}
+
+.project-card__link {
+  flex: 1 1 auto;
+  min-height: 2.75rem; // 44px
+  padding-inline: var(--space-4);
+  font-size: var(--fs-100);
+}
+
+.project-card__pending {
+  font-size: var(--fs-100);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-dialog,
+  .projects-dialog[open] {
+    translate: none;
+  }
+}

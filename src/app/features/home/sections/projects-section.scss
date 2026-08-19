@@ -180,3 +180,9 @@
   font-style: italic;
   color: var(--color-text-muted);
 }
+
+.projects__footer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--space-16);
+}

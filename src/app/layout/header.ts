@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs';
 import { ContentService } from '@/core/content/content.service';
 import { LanguageService } from '@/core/i18n/language.service';
 import { LANGUAGES, type Language } from '@/core/i18n/language.types';
+import { ScrollLockService } from '@/core/services/scroll-lock.service';
 import { Logo } from '@/shared/components/logo';
 
 const SCROLLED_AFTER_PX = 40;
@@ -25,6 +26,7 @@ export class Header {
   private readonly contentService = inject(ContentService);
   private readonly languageService = inject(LanguageService);
   private readonly router = inject(Router);
+  private readonly scrollLock = inject(ScrollLockService);
 
   protected readonly languages = LANGUAGES;
   protected readonly language = this.languageService.language;
@@ -55,8 +57,12 @@ export class Header {
   });
 
   protected toggleMenu(): void {
-    this.isMenuOpen.update((open) => !open);
-    this.lockBodyScroll(this.isMenuOpen());
+    if (this.isMenuOpen()) {
+      this.closeMenu();
+      return;
+    }
+    this.isMenuOpen.set(true);
+    this.scrollLock.lock();
   }
 
   protected closeMenu(): void {
@@ -64,7 +70,7 @@ export class Header {
       return;
     }
     this.isMenuOpen.set(false);
-    this.lockBodyScroll(false);
+    this.scrollLock.release();
   }
 
   protected selectLanguage(language: Language): void {
@@ -73,10 +79,5 @@ export class Header {
 
   protected onScroll(): void {
     this.isScrolled.set(window.scrollY > SCROLLED_AFTER_PX);
-  }
-
-  /** Verhindert, dass die Seite hinter dem offenen Vollbild-Menue mitscrollt. */
-  private lockBodyScroll(locked: boolean): void {
-    document.body.classList.toggle('is-menu-open', locked);
   }
 }

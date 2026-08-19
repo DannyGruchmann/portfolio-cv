@@ -80,7 +80,7 @@ ol[class] {
   @include focus-ring;
 }
 
-body.is-menu-open {
+body.is-scroll-locked {
   overflow: hidden;
 }
 

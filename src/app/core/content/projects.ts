@@ -27,6 +27,7 @@ export const PROJECTS: readonly Project[] = [
     id: 'join',
     imageBase: 'join',
     name: 'Join',
+    category: 'webapp',
     tech: ['JavaScript', 'HTML', 'CSS', 'Firebase'],
     description: {
       de: 'Aufgabenverwaltung nach dem Kanban-Prinzip, gebaut ohne Framework. Drag-and-drop zwischen den Spalten, Kontaktverwaltung, Kategorien und Prioritäten laufen über eigenes State-Handling in JavaScript, die Daten liegen in Firebase.',
@@ -43,6 +44,7 @@ export const PROJECTS: readonly Project[] = [
     id: 'dabubble',
     imageBase: 'dabubble',
     name: 'DABubble',
+    category: 'webapp',
     tech: ['Angular', 'TypeScript', 'SCSS', 'Firebase'],
     description: {
       de: 'Chat-Anwendung im Stil von Slack. Kanäle, Direktnachrichten und Threads synchronisieren in Echtzeit über die Firebase Realtime Database. Dazu Anmeldung, Präsenzanzeige und eine Oberfläche, die vom Handy bis zum Desktop dasselbe Layout trägt.',
@@ -59,6 +61,7 @@ export const PROJECTS: readonly Project[] = [
     id: 'code-a-cuisine',
     imageBase: 'code-a-cuisine',
     name: 'Code A Cuisine',
+    category: 'webapp',
     tech: ['Angular', 'TypeScript', 'Firebase', 'n8n'],
     description: {
       de: 'Rezept-Generator. Die Eingabe landet in Firestore, ein n8n-Workflow erzeugt daraus per Sprachmodell ein Rezept und schreibt das Ergebnis zurück. Tageslimits pro IP und global halten die API-Kosten im Rahmen.',
@@ -75,6 +78,7 @@ export const PROJECTS: readonly Project[] = [
     id: 'famora',
     imageBase: 'famora',
     name: 'Famora',
+    category: 'webapp',
     tech: ['React', 'TypeScript', 'Tailwind', 'Supabase'],
     description: {
       de: 'Eigenes Projekt, Idee und Umsetzung von mir. Die Web-App führt Hinterbliebene nach einem Todesfall durch Behördengänge, Fristen und Verträge: Ein kurzes Onboarding fragt die Situation ab und macht daraus eine persönliche Aufgabenliste. Anmeldung und Daten laufen über Supabase.',
@@ -86,5 +90,23 @@ export const PROJECTS: readonly Project[] = [
     },
     liveUrl: 'https://famora.dannygruchmann.com',
     repoUrl: 'https://github.com/DannyGruchmann/famora',
+  },
+  {
+    id: 'hellmont-ug',
+    imageBase: 'hellmont-ug',
+    name: 'HellMont UG',
+    category: 'website',
+    isClientProject: true,
+    tech: ['Next.js', 'React', 'TypeScript'],
+    description: {
+      de: 'Website für regionalen Dachdecker-Fachbetrieb. Photovoltaik-Komplettanlagen, Dach- und Fassadenreinigung, Garten- und Grundstückspflege — alles aus einer Hand mit transparenten Festpreisen.',
+      en: 'Website for a regional roofing specialist. Complete photovoltaic systems, roof and facade cleaning, garden and property maintenance — all from a single source with transparent fixed pricing.',
+    },
+    imageAlt: {
+      de: 'Screenshot der HellMont-Website mit Leistungsübersicht',
+      en: 'Screenshot of the HellMont website showing service overview',
+    },
+    liveUrl: 'https://hell-mont.de',
+    repoUrl: null,
   },
 ];

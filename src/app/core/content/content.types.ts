@@ -33,12 +33,20 @@ export interface SkillsContent {
   intro: string;
 }
 
+export type ProjectCategory = 'webapp' | 'website';
+
 export interface ProjectsContent {
   title: string;
   intro: string;
   liveLabel: string;
   repoLabel: string;
   linksPendingNote: string;
+  moreLabel: string;
+  dialogTitle: string;
+  dialogIntro: string;
+  closeLabel: string;
+  clientBadgeLabel: string;
+  categoryLabels: Record<ProjectCategory, string>;
 }
 
 export interface ContactContent {
@@ -106,6 +114,8 @@ export interface Project {
   id: string;
   imageBase: string;
   name: string;
+  category: ProjectCategory;
+  isClientProject?: boolean;
   tech: readonly string[];
   description: Localized;
   imageAlt: Localized;

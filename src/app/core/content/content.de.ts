@@ -54,6 +54,15 @@ export const PROJECTS_DE: ProjectsContent = {
   liveLabel: 'Live ansehen',
   repoLabel: 'GitHub',
   linksPendingNote: 'Links folgen',
+  moreLabel: 'Mehr Projekte',
+  dialogTitle: 'Alle Projekte',
+  dialogIntro: 'Alles, was ich bisher gebaut habe, sortiert nach Art der Anwendung.',
+  closeLabel: 'Schließen',
+  clientBadgeLabel: 'Kundenprojekt',
+  categoryLabels: {
+    webapp: 'Web-Apps',
+    website: 'Websites',
+  },
 };
 
 export const CONTACT_DE: ContactContent = {
