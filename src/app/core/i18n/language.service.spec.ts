@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { LanguageService } from './language.service';
 
-/** navigator.language ist schreibgeschuetzt und muss zum Testen überschrieben werden. */
 function mockBrowserLanguage(value: string): () => void {
   const descriptor = Object.getOwnPropertyDescriptor(Navigator.prototype, 'language');
   Object.defineProperty(navigator, 'language', { value, configurable: true });
@@ -82,7 +81,6 @@ describe('LanguageService', () => {
   });
 
   it('fällt auf Deutsch zurueck, wenn localStorage nicht verfuegbar ist', () => {
-    // Simuliert den Inkognito-Modus mit blockiertem Speicher (Checkliste: kein State-Leak).
     const original = Storage.prototype.getItem;
     Storage.prototype.getItem = () => {
       throw new Error('SecurityError');
