@@ -1,3 +1,5 @@
+// Global stylesheet entry point, loaded once for the whole app. Order matters: fonts
+// and variables must be defined before reset/buttons use them.
 @use 'styles/fonts';
 @use 'styles/variables';
 @use 'styles/reset';

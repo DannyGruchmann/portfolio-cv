@@ -1,3 +1,6 @@
+// English site copy. Field shapes come from content.types.ts; content.de.ts is the
+// German (default) counterpart and must stay structurally in sync with this file.
+
 import type {
   AboutContent,
   ContactContent,

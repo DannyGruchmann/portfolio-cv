@@ -1,3 +1,7 @@
+// German legal notice and privacy policy copy. legal.en.ts is the English counterpart.
+// Changes here have legal implications (§ 5 DDG, DSGVO) — see the sections' own wording
+// before restructuring, not just translating.
+
 import type { LegalPageContent } from './content.types';
 import { CONTACT_EMAIL } from './contact-details';
 

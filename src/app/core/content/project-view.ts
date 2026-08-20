@@ -8,6 +8,7 @@ export interface LocalizedProject extends Omit<Project, 'description' | 'imageAl
   techLine: string;
 }
 
+/** Resolves a Project's localized fields for one language and flattens tech[] into a display line. */
 export function localizeProject(project: Project, language: Language): LocalizedProject {
   return {
     ...project,

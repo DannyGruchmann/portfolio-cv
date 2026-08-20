@@ -1,5 +1,9 @@
 import type { Localized } from '@/core/i18n/language.types';
 
+// Content contract for the site copy. Each interface here mirrors one section's fields;
+// content.de.ts and content.en.ts must each provide a matching object per interface,
+// combined into SiteContent by site-content.ts.
+
 export interface NavContent {
   about: string;
   skills: string;

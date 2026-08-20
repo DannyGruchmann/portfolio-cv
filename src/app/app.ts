@@ -3,10 +3,11 @@ import { ViewportScroller } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { ContentService } from '@/core/content/content.service';
-import { Footer } from '@/layout/footer';
-import { Header } from '@/layout/header';
-import { GoUpButton } from '@/shared/components/go-up-button';
+import { Footer } from '@/layout/footer/footer';
+import { Header } from '@/layout/header/header';
+import { GoUpButton } from '@/shared/components/go-up-button/go-up-button';
 
+/** Root shell: header, routed page content, footer, and the scroll-to-top button. */
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,17 +22,17 @@ export class App {
   protected readonly skipLabel = computed(() => this.contentService.content().nav.skipToContent);
 
   constructor() {
-    // Der Router springt Anker ueber window.scrollTo an und setzt die Oberkante der
-    // Section auf y=0. Der Kopfbereich liegt fixiert darueber und wuerde sie
-    // anschneiden. CSS scroll-padding-top hilft hier nicht: das greift nur, wenn der
-    // Browser selbst scrollt, nicht bei window.scrollTo. Also die Hoehe hier abziehen.
+    // The router scrolls to anchors via window.scrollTo and puts the section's top
+    // edge at y=0. The fixed header sits on top of that and would cover it. CSS
+    // scroll-padding-top doesn't help here — it only applies when the browser itself
+    // scrolls, not for window.scrollTo — so the offset is subtracted here instead.
     this.viewportScroller.setOffset(() => [0, this.headerHeight()]);
   }
 
   /**
-   * Gemessen statt aus dem Token gelesen: --header-height steht in rem und aendert
-   * sich am Breakpoint. Der Kopfbereich hat immer genau diese Hoehe, auch bei
-   * offenem Menue — das Overlay haengt am Navigationsblock, nicht am Header.
+   * Measured instead of read from the CSS token: --header-height is in rem and
+   * changes at the breakpoint. The header is always exactly this tall, even with the
+   * mobile menu open — that overlay hangs off the nav block, not the header.
    */
   private headerHeight(): number {
     const header = document.querySelector('.site-header');

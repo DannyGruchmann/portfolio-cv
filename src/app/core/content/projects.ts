@@ -1,3 +1,7 @@
+// Source of truth for the social links shown in header/footer and the portfolio project
+// cards shown in the projects section/dialog. Both are language-agnostic except for
+// Project.description/imageAlt (Localized), resolved per-language via project-view.ts.
+
 import type { Project, SocialLink } from './content.types';
 import { CONTACT_EMAIL } from './contact-details';
 

@@ -1,14 +1,13 @@
+// Shared button variants (.button--primary/--secondary/--on-primary/--block), used
+// across sections wherever a call-to-action button appears.
 @use 'mixins' as *;
 
-// Globale Button-Klassen. Global statt Komponente, weil Buttons sowohl als
-// <button> als auch als <a> auftreten und Angular-Styles sonst pro Komponente
-// dupliziert werden muessten.
 .button {
   display: inline-flex;
   gap: var(--space-2);
   align-items: center;
   justify-content: center;
-  min-height: 3.625rem; // 58px laut Figma
+  min-height: 3.625rem; 
   padding-inline: var(--space-6);
   font-family: var(--font-body);
   font-size: var(--fs-300);
@@ -25,8 +24,6 @@
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
 
-  // Vorlage: der Button waechst beim Hover leicht und bekommt den Schlagschatten.
-  // scale statt Groessenaenderung, damit der Textfluss daneben ruhig bleibt.
   &:hover:not(:disabled) {
     transform: scale(1.05);
   }
@@ -41,7 +38,6 @@
     transform: none;
   }
 
-  // Wer die Bewegung abgestellt hat, bekommt nur den Farb- und Schattenwechsel.
   @media (prefers-reduced-motion: reduce) {
     &:hover:not(:disabled),
     &:active:not(:disabled) {
@@ -72,7 +68,6 @@
   }
 }
 
-// Auf blauem Grund (Skill-Set-Section, Footer) kehrt sich der Kontrast um.
 .button--on-primary {
   color: var(--color-primary);
   background-color: var(--color-white);
@@ -81,7 +76,6 @@
   &:hover:not(:disabled) {
     color: var(--color-white);
     background-color: transparent;
-    // Auf blauem Grund traegt der blaue Buttonschatten nicht, deshalb neutral.
     box-shadow: 0 4px 12px rgb(15 32 74 / 0.25);
   }
 }

@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(
       routes,
-      // Anchor scrolling treibt die One-Page-Navigation (#about, #projects, ...).
+      // Anchor scrolling drives the one-page navigation (#about, #projects, ...).
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
     ),
   ],

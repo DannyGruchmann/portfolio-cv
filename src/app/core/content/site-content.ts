@@ -24,6 +24,7 @@ import type { SiteContent } from './content.types';
 import { LEGAL_NOTICE_DE, PRIVACY_POLICY_DE } from './legal.de';
 import { LEGAL_NOTICE_EN, PRIVACY_POLICY_EN } from './legal.en';
 
+/** Combines the per-language content modules into the shape ContentService serves. */
 export const SITE_CONTENT: Record<Language, SiteContent> = {
   de: {
     nav: NAV_DE,

@@ -5,6 +5,7 @@ import { LANGUAGES, type Language } from './language.types';
 const STORAGE_KEY = 'portfolio-language';
 const DEFAULT_LANGUAGE: Language = 'de';
 
+/** Holds the active UI language and persists it across visits (localStorage, falls back to the browser language). */
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly document = inject(DOCUMENT);
@@ -13,6 +14,7 @@ export class LanguageService {
   readonly language = this.currentLanguage.asReadonly();
 
   constructor() {
+    // Keeps <html lang="..."> (a11y/SEO) and the stored preference in lockstep with every change.
     effect(() => {
       const language = this.currentLanguage();
       this.document.documentElement.lang = language;
@@ -29,6 +31,7 @@ export class LanguageService {
   }
 }
 
+/** Resolution order: stored preference -> browser language -> DEFAULT_LANGUAGE. */
 function readStoredLanguage(): Language {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -38,6 +41,7 @@ function readStoredLanguage(): Language {
     const browserLanguage = navigator.language.slice(0, 2);
     return isLanguage(browserLanguage) ? browserLanguage : DEFAULT_LANGUAGE;
   } catch {
+    // Storage can be unavailable (private browsing, disabled cookies) — fall back silently.
     return DEFAULT_LANGUAGE;
   }
 }
@@ -46,6 +50,7 @@ function storeLanguage(language: Language): void {
   try {
     localStorage.setItem(STORAGE_KEY, language);
   } catch {
+    // Same as above: persistence is a nice-to-have, not a hard requirement.
   }
 }
 

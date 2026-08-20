@@ -1,3 +1,6 @@
+// English legal notice and privacy policy copy. legal.de.ts is the German (authoritative)
+// counterpart — this is the translation, not the legally binding source.
+
 import type { LegalPageContent } from './content.types';
 import { CONTACT_EMAIL } from './contact-details';
 

@@ -1,3 +1,5 @@
+// Global CSS reset/base element styles, plus the reduced-motion media query and the
+// .is-scroll-locked hook used by ScrollLockService.
 @use 'mixins' as *;
 
 *,

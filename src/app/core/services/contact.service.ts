@@ -8,10 +8,12 @@ export interface ContactRequest {
   name: string;
   email: string;
   message: string;
+  /** HONEYPOT — must stay empty. Bound to the hidden "website" field in contact-section.html/.ts; see the check in send() below. */
   website: string;
   language: string;
 }
 
+/** Sends the contact form to the configured n8n webhook. */
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   private readonly http = inject(HttpClient);
@@ -23,6 +25,9 @@ export class ContactService {
       );
     }
 
+    // HONEYPOT check: a filled "website" field means a bot filled every input, including
+    // one no human ever sees. Resolve silently (no error) so the caller shows the normal
+    // success state and the bot gets no signal that it was caught.
     if (request.website.trim() !== '') {
       return;
     }

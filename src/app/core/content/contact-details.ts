@@ -1,5 +1,5 @@
 /**
- * Zentrale Kontaktdaten. Werden sowohl in den Seiteninhalten als auch in den
- * Rechtstexten verwendet, damit ein Adresswechsel nur an einer Stelle passiert.
+ * Central contact details, used in both the site content and the legal texts so an
+ * address change only has to happen in one place.
  */
 export const CONTACT_EMAIL = 'danny.grmnn@gmail.com';
