@@ -102,17 +102,22 @@ src/
       content/             alle Texte, Projekte, Skills, Icon-Pfade
       i18n/                LanguageService (Signals, localStorage)
       services/            ContactService
-    layout/                Header mit Burger-Overlay, Footer
+    layout/                header/ mit Burger-Overlay, footer/
     features/
-      home/sections/       Hero, About, Skills, Projects, Contact
-      legal/               Impressum und Datenschutz auf gemeinsamem Seitenlayout
-    shared/components/     Logo, Icon, Social-Links, Go-up-Button, 404
+      home/                home.ts/.html/.scss + sections/
+        sections/          hero-section/, about-section/, skills-section/,
+                           projects-section/, projects-dialog/, contact-section/
+      legal/               legal-page/ als gemeinsames Layout,
+                           legal-notice/ und privacy-policy/ als Routen-Wrapper
+    shared/components/     logo/, icon/, social-links/, go-up-button/, not-found/
 public/                    statische Assets, landen im Build-Root
 docs/figma-specs/          vermessene Design-Specs und Referenzbilder aus Figma
 ```
 
 ## Konventionen
 
+- Eine Komponente, ein Ordner: alle Dateien einer Komponente liegen zusammen
+  (`about-section/about-section.{ts,html,scss,spec.ts}`), nie lose nebeneinander
 - Import-Alias `@/` zeigt auf `src/app`
 - SCSS-Partials ohne Pfad importierbar: `@use 'mixins' as *;`
   (über `stylePreprocessorOptions.includePaths` in `angular.json`)

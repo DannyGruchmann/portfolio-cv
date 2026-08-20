@@ -1,0 +1,50 @@
+// Floating scroll-to-top button, fixed to the bottom-right corner.
+@use 'mixins' as *;
+
+.go-up {
+  position: fixed;
+  inset-block-end: var(--space-6);
+  inset-inline-end: var(--space-6);
+  z-index: var(--z-dropdown);
+  display: grid;
+  place-items: center;
+  width: 2.4375rem; 
+  height: 2.4375rem; 
+  color: var(--color-text-on-primary);
+  visibility: hidden;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+    
+  &:hover {
+    background-color: var(--color-primary-dark);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
+
+  svg {
+    width: 1.25rem; 
+    height: 1.25rem; 
+  }
+}
+
+.go-up--visible {
+  visibility: visible;
+  opacity: 1;
+}

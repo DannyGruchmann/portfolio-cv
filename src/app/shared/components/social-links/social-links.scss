@@ -1,0 +1,33 @@
+// Social icon row/column, reused in hero (horizontal) and footer (vertical) via
+// custom properties for gap/icon size set by the consuming section.
+@use 'mixins' as *;
+
+.social-links {
+  display: flex;
+  gap: var(--social-gap, var(--space-6));
+  align-items: center;
+}
+
+.social-links--vertical {
+  flex-direction: column;
+  gap: var(--social-gap, var(--space-6));
+}
+
+.social-links__item {
+  display: grid;
+  place-items: center;
+  width: var(--social-hit-size, 2.5rem); 
+  height: var(--social-hit-size, 2.5rem); 
+  transition: transform var(--transition-fast);
+
+  &:hover {
+    transform: translateX(-5px);
+  }
+}
+
+.social-links__glyph {
+  width: var(--social-icon-size, 1.875rem); 
+  height: var(--social-icon-size, 1.875rem); 
+  background: var(--social-fill, var(--gradient-brand));
+  mask: var(--social-icon) center / contain no-repeat;
+}
