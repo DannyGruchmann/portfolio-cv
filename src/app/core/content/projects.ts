@@ -93,7 +93,7 @@ export const PROJECTS: readonly Project[] = [
       en: 'Screenshot of the Famora checklist with progress indicator and tasks with deadlines',
     },
     liveUrl: 'https://famora.dannygruchmann.com',
-    repoUrl: 'https://github.com/DannyGruchmann/famora',
+    repoUrl: 'https://github.com/DannyGruchmann/famora-care',
   },
   {
     id: 'hellmont-ug',
