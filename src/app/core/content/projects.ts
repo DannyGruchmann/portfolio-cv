@@ -83,10 +83,10 @@ export const PROJECTS: readonly Project[] = [
     imageBase: 'famora',
     name: 'Famora',
     category: 'webapp',
-    tech: ['React', 'TypeScript', 'Tailwind', 'Supabase'],
+    tech: ['Angular', 'TypeScript', 'SCSS', 'Supabase'],
     description: {
-      de: 'Eigenes Projekt, Idee und Umsetzung von mir. Die Web-App führt Hinterbliebene nach einem Todesfall durch Behördengänge, Fristen und Verträge: Ein kurzes Onboarding fragt die Situation ab und macht daraus eine persönliche Aufgabenliste. Anmeldung und Daten laufen über Supabase.',
-      en: 'A project of my own, from the idea to the build. The web app guides bereaved families through the authorities, deadlines and contracts that follow a death: a short onboarding asks about the situation and turns it into a personal task list. Sign-in and data run on Supabase.',
+      de: 'Eigenes Projekt, Idee und Umsetzung von mir. Die App begleitet zwei Situationen: den Nachlass nach einem Todesfall und die eigene Vorsorge fürs Notfallblatt. Ein Frage-Onboarding macht daraus eine Checkliste nach Dringlichkeit, die sich in der Familie aufteilen lässt. Anmeldung und Daten laufen über Supabase.',
+      en: 'A project of my own, from idea to build. The app covers two situations: settling an estate after a death, and preparing your own emergency sheet in advance. A short onboarding turns the answers into a checklist sorted by urgency, one the family can split between them. Sign-in and data run on Supabase.',
     },
     imageAlt: {
       de: 'Screenshot der Famora-Checkliste mit Fortschrittsanzeige und Aufgaben samt Fristen',

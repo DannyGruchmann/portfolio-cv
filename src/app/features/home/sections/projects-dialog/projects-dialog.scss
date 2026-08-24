@@ -275,11 +275,6 @@
 }
 
 .project-card__description {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
   font-size: var(--fs-200);
   line-height: var(--lh-body);
   color: var(--color-text-muted);
